@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+
+.idea/
+
+test/
+build/
+dist/
+*.egg-info/
+
+build.sh
+upload.sh
+push-master.sh
+
+wiki/
