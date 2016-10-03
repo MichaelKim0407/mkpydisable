@@ -8,7 +8,7 @@ with open(os.path.join(root_dir, "VERSION")) as f:
     VERSION = f.read().rstrip()
 
 setup(
-    name="mkpydisalbe",
+    name="mkpydisable",
 
     version=VERSION,
 
