@@ -12,6 +12,10 @@ setup(
 
     version=VERSION,
 
+    install_requires=[
+        "mklibpy>=0.4"
+    ],
+
     packages=find_packages(),
 
     url="https://github.com/MichaelKim0407/mkpydisable",
