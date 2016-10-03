@@ -28,7 +28,7 @@ class AllowPolicy(object):
     EXTENSIONS = 4
     DIRS_AND_EXTENSIONS = 8
 
-    def __init__(self, value=0):
+    def __init__(self, value=ALL):
         self.__value = value
         self.__all = False
         self.__files = StringCollection()
