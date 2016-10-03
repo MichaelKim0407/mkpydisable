@@ -1,14 +1,17 @@
-import __builtin__
 import os
 
 from mklibpy.common.string import String, AnyString
 
+from . import __builtin__, osinfo
+
 __author__ = 'Michael'
 
-__open__ = __builtin__.open
-__file___ = __builtin__.file
 __abspath__ = os.path.abspath
 __exists__ = os.path.exists
+
+__open__ = __builtin__.open
+if osinfo.PYTHON2:
+    __file___ = __builtin__.file
 
 
 class AccessDenied(Exception):
@@ -120,5 +123,6 @@ class LimitedOpen(object):
     def make_open(self):
         return self.__make(__open__)
 
-    def make_file(self):
-        return self.__make(__file___)
+    if osinfo.PYTHON2:
+        def make_file(self):
+            return self.__make(__file___)

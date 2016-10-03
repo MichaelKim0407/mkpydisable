@@ -1,6 +1,6 @@
-import __builtin__
-
 from mklibpy.common.string import String, AnyString
+
+from . import __builtin__
 
 __author__ = 'Michael'
 

@@ -1,4 +1,4 @@
-import __builtin__
+from . import __builtin__
 
 __author__ = 'Michael'
 
