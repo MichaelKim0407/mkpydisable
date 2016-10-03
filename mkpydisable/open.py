@@ -1,7 +1,7 @@
 import __builtin__
 import os
 
-from mklibpy.common.string import String, StringCollection
+from mklibpy.common.string import String, AnyString
 
 __author__ = 'Michael'
 
@@ -31,9 +31,9 @@ class AllowPolicy(object):
     def __init__(self, value=ALL):
         self.__value = value
         self.__all = False
-        self.__files = StringCollection()
-        self.__dirs = StringCollection()
-        self.__exts = StringCollection()
+        self.__files = AnyString()
+        self.__dirs = AnyString()
+        self.__exts = AnyString()
 
     def add_files(self, *files):
         self.__files.add(*[__abspath__(f) for f in files])
