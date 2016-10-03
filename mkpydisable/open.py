@@ -6,6 +6,7 @@ from mklibpy.common.string import String, StringCollection
 __author__ = 'Michael'
 
 __open__ = __builtin__.open
+__file___ = __builtin__.file
 __abspath__ = os.path.abspath
 __exists__ = os.path.exists
 
@@ -84,34 +85,40 @@ class LimitedOpen(object):
     def allow_write_override(self, allow=True):
         self.__wo = allow
 
-    def make(self):
+    def __make(self, __builtin_call):
         def __new_open(name, mode='r', *args, **kwargs):
             abs_name = String(os.path.abspath(name))
 
-            def __builtin__call():
-                return __open__(abs_name, mode=mode, *args, **kwargs)
+            def __builtin_call_():
+                return __builtin_call(abs_name, mode=mode, *args, **kwargs)
 
             def __raise():
                 raise AccessDenied(name, mode)
 
             if "r" in mode:
                 if self.__r.allows(abs_name):
-                    return __builtin__call()
+                    return __builtin_call_()
                 else:
                     __raise()
             elif "w" in mode:
                 if (not self.__wo) and __exists__(abs_name):
                     __raise()
                 if self.__w.allows(abs_name):
-                    return __builtin__call()
+                    return __builtin_call_()
                 else:
                     __raise()
             elif "a" in mode:
                 if self.__a.allows(abs_name):
-                    return __builtin__call()
+                    return __builtin_call_()
                 else:
                     __raise()
             else:
                 __raise()
 
         return __new_open
+
+    def make_open(self):
+        return self.__make(__open__)
+
+    def make_file(self):
+        return self.__make(__file___)
